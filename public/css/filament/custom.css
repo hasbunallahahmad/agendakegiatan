@@ -1,0 +1,77 @@
+/* Custom Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Clock Glow Effect */
+.clock-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Card hover effects */
+.agenda-card {
+    transition: all 0.3s ease;
+}
+
+.agenda-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Category badges */
+.category-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.category-badge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: inherit;
+}
+
+/* Responsive font sizes */
+@media (max-width: 640px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .clock-display {
+        font-size: 2.5rem;
+    }
+}
