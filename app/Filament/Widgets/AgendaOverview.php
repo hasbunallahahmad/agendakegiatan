@@ -13,17 +13,17 @@ class AgendaOverview extends BaseWidget
         return [
             Stat::make('Agenda', Agenda::count())
                 ->description('Total Agenda')
-                // ->descriptionIcon('heroicon-s-collection')
+                ->descriptionIcon('heroicon-s-folder')
                 ->color('primary'),
 
             Stat::make('Agenda Hari Ini', Agenda::today()->count())
                 ->description('Agenda Hari Ini')
-                // ->descriptionIcon('heroicon-m-calendar-days')
+                ->descriptionIcon('heroicon-m-calendar')
                 ->color('danger'),
 
             Stat::make('Agenda Mendatang', Agenda::upcoming()->count())
                 ->description('Agenda Mendatang')
-                // ->descriptionIcon('heroicon-m-calendar-days')
+                ->descriptionIcon('heroicon-m-calendar')
                 ->color('success'),
         ];
     }

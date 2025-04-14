@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="mt-6 text-center border-t border-gray-700 pt-6">
-                <p class="text-gray-400">&copy; {{ date('Y') }} Manajemen Agenda. All rights reserved.</p>
+                <p class="text-gray-400">&copy; {{ date('Y') }} IT | Arpusda All rights reserved.</p>
             </div>
         </div>
     </footer>
