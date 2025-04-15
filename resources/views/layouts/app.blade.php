@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Agenda</title>
+    <title>Agenda Arpusda</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,12 +44,12 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
                 <i class="fas fa-calendar-check text-2xl mr-2"></i>
-                <h1 class="text-2xl font-bold">Manajemen Agenda</h1>
+                <h1 class="text-2xl font-bold">Agenda Arpusda</h1>
             </div>
             <div>
-                <a href="{{ route('filament.admin.auth.login') }}"
-                    class="bg-white text-blue-600 px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition-colors">
-                    <i class="fas fa-user-lock mr-1"></i> Login Admin
+                <a href="{{ route('filament.admin.auth.login') }}" {{-- class="bg-white text-blue-600 px-3 py-2 rounded-md font-medium hover:bg-blue-50 transition-colors"> --}}
+                    class="bg-white text-blue-600 px-3 py1.5 md:px-4 md:py-2 text-sm md:text-base rounded-md font-medium hover:bg-blue-50 transition-colors flex items-center">
+                    <i class="fas fa-user-lock mr-1"></i> Login
                 </a>
             </div>
         </div>
@@ -65,8 +65,8 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <h3 class="text-xl font-bold mb-2">Manajemen Agenda</h3>
-                    <p class="text-gray-300">Kelola agenda kegiatan Anda dengan mudah</p>
+                    <h3 class="text-xl font-bold mb-2">Agenda Dinas Arpus</h3>
+                    <p class="text-gray-300"> agenda kegiatan Dinas Arsip dan Perpustakaan Kota Semarang</p>
                 </div>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-300 hover:text-white transition-colors">

@@ -8,9 +8,8 @@
                 <div id="current-date" class="text-2xl md:text-3xl font-light mb-2"></div>
                 <div id="current-time" class="text-5xl md:text-6xl font-bold"></div>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Selamat Datang di Manajemen Agenda</h2>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">Kelola dan pantau semua agenda kegiatan Anda dengan
-                mudah dan efisien</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Selamat Datang di Agenda Kegiatan</h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">Dinas Arsip dan Perpustakaan Kota Semarang</p>
         </div>
     </section>
 

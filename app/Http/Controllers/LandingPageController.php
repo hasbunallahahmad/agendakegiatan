@@ -17,7 +17,7 @@ class LandingPageController extends Controller
         $upcomingAgendas = Agenda::published()
             ->upcoming()
             ->orderBy('start_date')
-            ->limit(5)
+            ->limit(15)
             ->get();
 
         return view('landing', compact('todayAgendas', 'upcomingAgendas'));
