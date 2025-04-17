@@ -44,15 +44,8 @@ class UpcomingAgenda extends BaseWidget
                     ->label('Lokasi')
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('category')
-                    ->label('Kategori')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'meeting' => 'danger',
-                        'event' => 'success',
-                        'training' => 'warning',
-                        default => 'gray',
-                    }),
+                Tables\Columns\TextColumn::make('bidang.nama_bidang')
+                    ->label('Bidang'),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publikasi')

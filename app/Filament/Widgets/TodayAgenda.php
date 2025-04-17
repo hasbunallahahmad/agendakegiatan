@@ -43,15 +43,8 @@ class TodayAgenda extends BaseWidget
                     ->label('Lokasi')
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('category')
-                    ->label('Kategori')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'general' => 'primary',
-                        'meeting' => 'warning',
-                        'training' => 'success',
-                        default => 'secondary',
-                    }),
+                Tables\Columns\TextColumn::make('bidang.nama_bidang')
+                    ->label('Bidang'),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('publikasi')

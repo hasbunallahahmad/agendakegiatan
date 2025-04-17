@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AgendaResource\Pages;
 use App\Filament\Resources\AgendaResource\RelationManagers;
 use App\Models\Agenda;
+use App\Models\Bidang;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
@@ -46,14 +47,10 @@ class AgendaResource extends Resource
                     ->label('Lokasi')
                     ->maxLength(255),
 
-                Forms\Components\Select::make('category')
-                    ->label('Kategori')
-                    ->options([
-                        'general' => 'Umum',
-                        'meeting' => 'rapat',
-                        'training' => 'pelatihan',
-                        'other' => 'lainnya',
-                    ]),
+                Forms\Components\Select::make('bidang_id')
+                    ->label('Bidang')
+                    ->options(Bidang::all()->pluck('nama_bidang', 'id'))
+                    ->searchable(),
 
                 Forms\Components\Toggle::make('is_published')
                     ->label('Diterbitkan')
@@ -67,6 +64,7 @@ class AgendaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Judul Agenda')
+                    ->limit(50)
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('start_date')
@@ -74,26 +72,19 @@ class AgendaResource extends Resource
                     ->dateTime('d M Y, H:i')
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('end_date')
-                    ->label('Tanggal Selesai')
-                    ->dateTime('d M Y, H:i')
-                    ->sortable()
-                    ->toggleable(),
+                // Tables\Columns\TextColumn::make('end_date')
+                //     ->label('Tanggal Selesai')
+                //     ->dateTime('d M Y, H:i')
+                //     ->sortable()
+                //     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('location')
                     ->label('Lokasi')
+                    ->limit(50)
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('category')
-                    ->label('Kategori')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'general' => 'primary',
-                        'meeting' => 'warning',
-                        'training' => 'success',
-                        'other' => 'danger',
-                        default => 'secondary',
-                    }),
+                Tables\Columns\TextColumn::make('bidang.nama_bidang')
+                    ->label('Bidang'),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Diterbitkan')
@@ -108,14 +99,14 @@ class AgendaResource extends Resource
                     ->label('Agenda Mendatang')
                     ->query(fn(Builder $query): Builder => $query->whereDate('start_date', '>', now()->toDateString())),
 
-                Tables\Filters\SelectFilter::make('category')
-                    ->label('Kategori')
-                    ->options([
-                        'general' => 'Umum',
-                        'meeting' => 'rapat',
-                        'training' => 'pelatihan',
-                        'other' => 'lainnya',
-                    ])
+                Tables\Filters\SelectFilter::make('bidang_id')
+                    ->label('Bidang')
+                // ->options([
+                //     'general' => 'Umum',
+                //     'meeting' => 'rapat',
+                //     'training' => 'pelatihan',
+                //     'other' => 'lainnya',
+                // ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

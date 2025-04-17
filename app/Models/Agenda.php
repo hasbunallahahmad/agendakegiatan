@@ -15,7 +15,7 @@ class Agenda extends Model
         'start_date',
         'end_date',
         'location',
-        'category',
+        'bidang_id',
         'is_published'
     ];
 
@@ -25,6 +25,10 @@ class Agenda extends Model
         'is_published' => 'boolean'
     ];
 
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class);
+    }
     public function scopePublished($query)
     {
         return $query->where('is_published', true);

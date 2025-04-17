@@ -8,6 +8,26 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': {
+                            100: '#fee2e2', // merah soft light
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444', // merah soft medium
+                            600: '#dc2626', // merah soft
+                            700: '#b91c1c', // merah darker
+                            800: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,7 +60,7 @@
 
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-4 shadow-md">
+    <header class="bg-gradient-to-r from-primary-500 to-primary-700 text-white py-4 shadow-md">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
                 <i class="fas fa-calendar-check text-2xl mr-2"></i>
@@ -48,7 +68,7 @@
             </div>
             <div>
                 <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
-                    class="bg-white text-blue-600 px-3 py1.5 md:px-4 md:py-2 text-sm md:text-base rounded-md font-medium hover:bg-blue-50 transition-colors flex items-center">
+                    class="bg-white text-primary-600 px-3 py1.5 md:px-4 md:py-2 text-sm md:text-base rounded-md font-medium hover:bg-primary-50 transition-colors flex items-center">
                     <i class="fas fa-user-lock mr-1"></i> Login
                 </a>
             </div>

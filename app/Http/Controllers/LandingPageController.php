@@ -11,11 +11,13 @@ class LandingPageController extends Controller
     {
         $todayAgendas = Agenda::published()
             ->today()
+            ->with('bidang')
             ->orderBy('start_date')
             ->get();
 
         $upcomingAgendas = Agenda::published()
             ->upcoming()
+            ->with('bidang')
             ->orderBy('start_date')
             ->limit(15)
             ->get();
