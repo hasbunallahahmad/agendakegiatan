@@ -30,12 +30,12 @@ class TodayAgenda extends BaseWidget
 
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('Tanggal Mulai')
-                    ->dateTime('H:i')
+                    ->dateTime('D, d M Y, H:i')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('end_date')
                     ->label('Tanggal Selesai')
-                    ->dateTime('H:i')
+                    ->dateTime('d,D M Y, H:i')
                     ->sortable()
                     ->toggleable(),
 

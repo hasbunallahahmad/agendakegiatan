@@ -171,7 +171,7 @@
                         class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors">
                         <i class="fas fa-envelope mr-2"></i> Kontak Kami
                     </a>
-                    <a href="{{ route('filament.admin.auth.login') }}"
+                    <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
                         class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-colors">
                         <i class="fas fa-user mr-2"></i> Area Admin
                     </a>

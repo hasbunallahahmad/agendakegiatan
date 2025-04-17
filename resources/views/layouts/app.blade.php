@@ -47,7 +47,7 @@
                 <h1 class="text-2xl font-bold">Agenda Arpusda</h1>
             </div>
             <div>
-                <a href="{{ route('filament.admin.auth.login') }}" {{-- class="bg-white text-blue-600 px-3 py-2 rounded-md font-medium hover:bg-blue-50 transition-colors"> --}}
+                <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
                     class="bg-white text-blue-600 px-3 py1.5 md:px-4 md:py-2 text-sm md:text-base rounded-md font-medium hover:bg-blue-50 transition-colors flex items-center">
                     <i class="fas fa-user-lock mr-1"></i> Login
                 </a>

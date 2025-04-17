@@ -21,8 +21,6 @@ class AgendaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
     protected static ?string $navigationGroup = 'Manajemen Konten';
 
-
-
     public static function form(Form $form): Form
     {
         return $form
@@ -128,7 +126,8 @@ class AgendaResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('start_date', 'desc');
+            ->defaultSort('start_date', 'desc')
+            ->paginated(25);
     }
 
     public static function getRelations(): array

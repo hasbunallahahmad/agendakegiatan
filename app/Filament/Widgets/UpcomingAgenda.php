@@ -29,6 +29,7 @@ class UpcomingAgenda extends BaseWidget
                     ->label('Tanggal')
                     ->dateTime('d M Y')
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('title')
                     ->label('Judul')
                     ->searchable()
@@ -36,7 +37,7 @@ class UpcomingAgenda extends BaseWidget
 
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('Waktu Mulai')
-                    ->dateTime('H:i')
+                    ->dateTime('d M Y, H:i')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('location')
