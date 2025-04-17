@@ -109,8 +109,12 @@ class AgendaResource extends Resource
                 // ])
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(false)
+                    ->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()
+                    ->label(false)
+                    ->tooltip('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

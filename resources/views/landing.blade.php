@@ -21,7 +21,7 @@
                     <i class="fas fa-calendar-day text-primary-500 mr-2"></i>
                     Agenda Hari Ini
                 </h2>
-                <div class="bg-blue-100 text-primary-800 font-medium px-4 py-2 rounded-full">
+                <div class="bg-primary-100 text-white-800 font-medium px-4 py-2 rounded-full">
                     {{ now()->format('d M Y') }}
                 </div>
             </div>
