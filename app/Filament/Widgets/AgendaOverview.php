@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Agenda;
+use Filament\Actions\Action;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -25,6 +26,18 @@ class AgendaOverview extends BaseWidget
                 ->description('Agenda Mendatang')
                 ->descriptionIcon('heroicon-m-calendar')
                 ->color('success'),
+        ];
+    }
+
+    protected function getActions(): array
+    {
+        return [
+            Action::make('createAgenda')
+                ->label('Tambah Agenda')
+                ->icon('heroicon-o-plus-circle')
+                ->color('secondary')
+                ->url(route('filament.admin.resources.agendas.create'))
+                ->button(),
         ];
     }
 }

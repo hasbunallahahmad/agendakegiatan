@@ -32,6 +32,7 @@ class UpcomingAgenda extends BaseWidget
 
                 Tables\Columns\TextColumn::make('title')
                     ->label('Judul')
+                    ->limit(50)
                     ->searchable()
                     ->sortable(),
 
