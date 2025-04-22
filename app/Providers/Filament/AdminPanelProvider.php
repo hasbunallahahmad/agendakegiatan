@@ -2,13 +2,17 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\EditProfile;
 use App\Filament\Widgets\AgendaOverview;
 use App\Filament\Widgets\TodayAgenda;
 use App\Filament\Widgets\UpcomingAgenda;
+use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\UserMenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -65,6 +69,13 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
 
-            ->brandName('Manajemen Agenda');
+            ->brandName('Manajemen Agenda')
+
+            ->UserMenuItems([
+                'profile' => MenuItem::make()
+                    ->label('Profile')
+                    ->icon('heroicon-o-user-circle')
+                    ->url('/admin/edit-profile'),
+            ]);
     }
 }
