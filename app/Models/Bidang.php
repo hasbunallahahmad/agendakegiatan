@@ -16,6 +16,6 @@ class Bidang extends Model
 
     public function agendas()
     {
-        return $this->hasMany(Agenda::class);
+        return $this->belongsToMany(related: Agenda::class);
     }
 }

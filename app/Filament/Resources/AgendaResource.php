@@ -49,7 +49,11 @@ class AgendaResource extends Resource
 
                 Forms\Components\Select::make('bidang_id')
                     ->label('Bidang')
-                    ->options(Bidang::all()->pluck('nama_bidang', 'id'))
+                    ->multiple()
+                    // ->options(Bidang::all()
+                    //     ->pluck('nama_bidang', 'id'))
+                    ->relationship('bidang', 'nama_bidang')
+                    ->preload()
                     ->searchable(),
 
                 Forms\Components\Toggle::make('is_published')
@@ -84,7 +88,9 @@ class AgendaResource extends Resource
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('bidang.nama_bidang')
-                    ->label('Bidang'),
+                    ->label('Bidang')
+                    ->badge()
+                    ->separator(', '),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Diterbitkan')

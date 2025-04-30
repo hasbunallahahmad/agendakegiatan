@@ -15,7 +15,7 @@ class Agenda extends Model
         'start_date',
         'end_date',
         'location',
-        'bidang_id',
+        // 'bidang_id',
         'is_published'
     ];
 
@@ -27,7 +27,7 @@ class Agenda extends Model
 
     public function bidang()
     {
-        return $this->belongsTo(Bidang::class);
+        return $this->belongsToMany(Bidang::class);
     }
     public function scopePublished($query)
     {
