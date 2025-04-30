@@ -32,7 +32,7 @@ class AgendaResource extends Resource
                     ->maxLength(255),
 
                 Forms\Components\Textarea::make('description')
-                    ->label('Deskripsi Agenda')
+                    ->label('Catatan')
                     ->columnSpanFull(),
 
                 Forms\Components\DateTimePicker::make('start_date')

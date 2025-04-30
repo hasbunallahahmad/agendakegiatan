@@ -29,6 +29,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($todayAgendas as $agenda)
                     <div class="agenda-card bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
+                        <div class="bg-blue-50 px-6 py-3 border-b border-primary-100">
+                            <div class="flex items-center">
+                                <div
+                                    class="bg-primary-500 text-white rounded-lg w-12 h-12 flex items-center justify-center mr-3">
+                                    <span class="font-bold text-lg">{{ $agenda->start_date->format('d') }}</span>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-600">
+                                        {{ $agenda->start_date->translatedFormat('M Y') }}</div>
+                                    <div class="text-sm text-gray-500">{{ $agenda->start_date->translatedFormat('l') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <h3 class="text-xl font-semibold text-gray-800">{{ $agenda->title }}</h3>
@@ -38,13 +53,6 @@
                                 <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 50) }}</p>
                             @endif
 
-                            {{-- <div class="flex flex-col space-y-2">
-                                @if ($agenda->bidang)
-                                    <div class="flex items-center text-gray-500">
-                                        <i class="fas fa-user mr-2 text-primary-500"></i>
-                                        <span>{{ $agenda->bidang->nama_bidang }}</span>
-                                    </div>
-                                @endif --}}
                             @if ($agenda->bidang->count() > 0)
                                 <div class="flex items-center text-gray-500">
                                     <i class="fas fa-user mr-2 text-primary-500"></i>
@@ -76,17 +84,16 @@
                             @endif
                         </div>
                     </div>
-            </div>
-            @empty
-                <div class="col-span-full text-center py-12">
-                    <div class="mx-auto w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-calendar-xmark text-4xl text-primary-300"></i>
-                    </div>
-                    <h3 class="text-xl font-medium text-gray-700 mb-2">Tidak Ada Agenda Hari Ini</h3>
-                    <p class="text-gray-500">Tidak ada agenda yang terjadwal untuk hari ini.</p>
+                    @empty
+                        <div class="col-span-full text-center py-12">
+                            <div class="mx-auto w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-calendar-xmark text-4xl text-primary-300"></i>
+                            </div>
+                            <h3 class="text-xl font-medium text-gray-700 mb-2">Tidak Ada Agenda Hari Ini</h3>
+                            <p class="text-gray-500">Tidak ada agenda yang terjadwal untuk hari ini.</p>
+                        </div>
+                    @endforelse
                 </div>
-                @endforelse
-            </div>
             </div>
         </section>
 
@@ -110,8 +117,10 @@
                                         <span class="font-bold text-lg">{{ $agenda->start_date->format('d') }}</span>
                                     </div>
                                     <div>
-                                        <div class="font-medium text-gray-600">{{ $agenda->start_date->format('M Y') }}</div>
-                                        <div class="text-sm text-gray-500">{{ $agenda->start_date->format('l') }}</div>
+                                        <div class="font-medium text-gray-600">
+                                            {{ $agenda->start_date->translatedFormat('M Y') }}</div>
+                                        <div class="text-sm text-gray-500">{{ $agenda->start_date->translatedFormat('l') }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -122,59 +131,52 @@
                                 </div>
 
                                 @if ($agenda->description)
-                                    <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 50) }}</p>
+                                    <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 250) }}</p>
                                 @endif
 
-                                {{-- <div class="flex flex-col space-y-2">
-                                    @if ($agenda->bidang)
+                                <div class="flex flex-col space-y-2">
+                                    @if ($agenda->bidang->count() > 0)
                                         <div class="flex items-center text-gray-500">
                                             <i class="fas fa-user mr-2 text-primary-500"></i>
-                                            <span>{{ $agenda->bidang->nama_bidang }}</span>
+                                            <span>
+                                                @foreach ($agenda->bidang as $bidang)
+                                                    {{ $bidang->nama_bidang }}@if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </span>
                                         </div>
-                                    @endif --}}
-                                @if ($agenda->bidang->count() > 0)
+                                    @endif
+
                                     <div class="flex items-center text-gray-500">
-                                        <i class="fas fa-user mr-2 text-primary-500"></i>
+                                        <i class="fas fa-clock mr-2 text-primary-500"></i>
                                         <span>
-                                            @foreach ($agenda->bidang as $bidang)
-                                                {{ $bidang->nama_bidang }}@if (!$loop->last)
-                                                    ,
-                                                @endif
-                                            @endforeach
+                                            {{ $agenda->start_date->format('H:i') }}
+                                            @if ($agenda->end_date)
+                                                - {{ $agenda->end_date->format('H:i') }}
+                                            @endif
                                         </span>
                                     </div>
-                                @endif
 
-                                {{-- <div class="flex flex-col space-y-2"> --}}
-                                <div class="flex items-center text-gray-500">
-                                    <i class="fas fa-clock mr-2 text-primary-500"></i>
-                                    <span>
-                                        {{ $agenda->start_date->format('H:i') }}
-                                        @if ($agenda->end_date)
-                                            - {{ $agenda->end_date->format('H:i') }}
-                                        @endif
-                                    </span>
+                                    @if ($agenda->location)
+                                        <div class="flex items-center text-gray-500">
+                                            <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
+                                            <span>{{ $agenda->location }}</span>
+                                        </div>
+                                    @endif
                                 </div>
-
-                                @if ($agenda->location)
-                                    <div class="flex items-center text-gray-500">
-                                        <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
-                                        <span>{{ $agenda->location }}</span>
-                                    </div>
-                                @endif
                             </div>
                         </div>
-                </div>
-                @empty
-                    <div class="col-span-full text-center py-12">
-                        <div class="mx-auto w-24 h-24 bg-primary-50 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-calendar-week text-4xl text-primary-300"></i>
-                        </div>
-                        <h3 class="text-xl font-medium text-gray-700 mb-2">Tidak Ada Agenda Mendatang</h3>
-                        <p class="text-gray-500">Belum ada agenda yang dijadwalkan untuk hari-hari mendatang.</p>
+                        @empty
+                            <div class="col-span-full text-center py-12">
+                                <div class="mx-auto w-24 h-24 bg-primary-50 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-calendar-week text-4xl text-primary-300"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-700 mb-2">Tidak Ada Agenda Mendatang</h3>
+                                <p class="text-gray-500">Belum ada agenda yang dijadwalkan untuk hari-hari mendatang.</p>
+                            </div>
+                        @endforelse
                     </div>
-                    @endforelse
-                </div>
                 </div>
             </section>
 
