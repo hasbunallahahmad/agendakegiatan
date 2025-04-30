@@ -50,7 +50,7 @@
                             </div>
 
                             @if ($agenda->description)
-                                <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 50) }}</p>
+                                <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 250) }}</p>
                             @endif
 
                             @if ($agenda->bidang->count() > 0)
