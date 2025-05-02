@@ -46,7 +46,9 @@ class UpcomingAgenda extends BaseWidget
                     ->toggleable(),
 
                 Tables\Columns\TextColumn::make('bidang.nama_bidang')
-                    ->label('Bidang'),
+                    ->label('Bidang')
+                    ->badge()
+                    ->separator(', '),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publikasi')

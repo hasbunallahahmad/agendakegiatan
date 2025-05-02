@@ -22,7 +22,7 @@
                     Agenda Hari Ini
                 </h2>
                 <div class="bg-primary-100 text-white-800 font-medium px-4 py-2 rounded-full">
-                    {{ now()->format('d M Y') }}
+                    {{ now()->translatedFormat('d M Y') }}
                 </div>
             </div>
 
