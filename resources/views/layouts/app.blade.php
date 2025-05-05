@@ -81,7 +81,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
+    {{-- <footer class="bg-gray-800 text-white py-8 mt-16">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
@@ -100,8 +100,34 @@
                     </a>
                 </div>
             </div>
-            <div class="mt-6 text-center border-t border-gray-700 pt-6">
+            <div class="mt-2 text-center border-t border-gray-700 pt-2">
                 <p class="text-gray-400">&copy; {{ date('Y') }} IT | Arpusda All rights reserved.</p>
+            </div>
+        </div>
+    </footer> --}}
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm font-medium">Agenda Dinas Arpus</span>
+                    <span class="text-xs text-gray-400">|</span>
+                    <span class="text-xs text-gray-400">Dinas Arsip dan Perpustakaan Kota Semarang</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-400 mt-2">
+                &copy; 2025 IT | Arpusda All rights reserved.
             </div>
         </div>
     </footer>

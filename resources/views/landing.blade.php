@@ -181,7 +181,7 @@
             </section>
 
             <!-- Call to Action Section -->
-            <section class="py-16 bg-white">
+            {{-- <section class="py-16 bg-white">
                 <div class="container mx-auto px-4 text-center">
                     <div class="max-w-3xl mx-auto">
                         <h2 class="text-3xl font-bold text-gray-800 mb-4">Butuh informasi lebih lanjut?</h2>
@@ -195,6 +195,25 @@
                             <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
                                 class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-colors">
                                 <i class="fas fa-user mr-2"></i> Area Admin
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endsection --}}
+            <section class="py-8 bg-white">
+                <div class="container mx-auto px-4 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Butuh informasi lebih lanjut?</h2>
+                        <p class="text-gray-600 mb-4">Jika Anda memiliki pertanyaan tentang agenda, silakan hubungi kami.</p>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a href="https://api.whatsapp.com/send/?phone=6282241407907&text&type=phone_number&app_absent=0"
+                                class="bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium py-2 px-4 rounded transition-colors">
+                                <i class="fas fa-envelope mr-1"></i> Kontak Kami
+                            </a>
+                            <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-2 px-4 rounded transition-colors">
+                                <i class="fas fa-user mr-1"></i> Area Admin
                             </a>
                         </div>
                     </div>
