@@ -119,7 +119,6 @@
 
 
         <!-- Upcoming Agenda Section -->
-        <!-- Upcoming Agenda Section -->
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between mb-8">
@@ -130,25 +129,71 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse($upcomingAgendas as $agenda)
+                    @php
+                        // Buat array untuk menyimpan agenda yang diproses per hari
+                        $expandedAgendas = [];
+
+                        // Loop melalui agenda mendatang
+                        foreach ($upcomingAgendas as $agenda) {
+                            // Jika multi-day, buat entri untuk setiap hari dalam rentang
+                            if ($agenda->is_multi_day && $agenda->end_date) {
+                                $startDate = $agenda->start_date->copy();
+                                $endDate = $agenda->end_date->copy();
+
+                                // Buat rentang tanggal dari tanggal mulai hingga tanggal selesai
+                                $currentDate = $startDate->copy();
+                                while ($currentDate->lte($endDate)) {
+                                    // Skip hari ini karena sudah ditampilkan di Today Agenda
+                                    if (!$currentDate->isToday()) {
+                                        // Buat salinan agenda untuk tanggal ini
+                                        $dailyAgenda = clone $agenda;
+                                        // Set tanggal display untuk tampilan
+                                        $dailyAgenda->display_date = $currentDate->copy();
+                                        $expandedAgendas[] = $dailyAgenda;
+                                    }
+                                    $currentDate->addDay();
+                                }
+                            }
+                            // Jika bukan multi-day, tambahkan langsung
+                            else {
+                                // Skip jika tanggalnya hari ini
+                                if (!$agenda->start_date->isToday()) {
+                                    $agenda->display_date = $agenda->start_date->copy();
+                                    $expandedAgendas[] = $agenda;
+                                }
+                            }
+                        }
+
+                        // Urutkan berdasarkan tanggal display
+                        usort($expandedAgendas, function ($a, $b) {
+                            return $a->display_date->lt($b->display_date) ? -1 : 1;
+                        });
+                    @endphp
+
+                    @forelse($expandedAgendas as $agenda)
                         <div class="agenda-card bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
                             <div class="bg-blue-50 px-6 py-3 border-b border-primary-100">
-                                <div class="flex items-center">
-                                    <div
-                                        class="bg-primary-500 text-white rounded-lg w-12 h-12 flex items-center justify-center mr-3">
-                                        <span class="font-bold text-lg">{{ $agenda->start_date->format('d') }}</span>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-600">
-                                            {{ $agenda->start_date->translatedFormat('M Y') }}
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="bg-primary-500 text-white rounded-lg w-12 h-12 flex items-center justify-center mr-3">
+                                            <span class="font-bold text-lg">{{ $agenda->display_date->format('d') }}</span>
                                         </div>
-                                        <div class="text-sm text-gray-500">
-                                            @if ($agenda->is_multi_day)
-                                                <span
-                                                    class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs">Multi-day</span>
-                                            @else
-                                                {{ $agenda->start_date->translatedFormat('l') }}
-                                            @endif
+                                        <div>
+                                            <div class="font-medium text-gray-600">
+                                                {{ $agenda->display_date->translatedFormat('M Y') }}
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                @if ($agenda->is_multi_day)
+                                                    <span
+                                                        class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs">
+                                                        Multi-day (Hari
+                                                        ke-{{ $agenda->start_date->diffInDays($agenda->display_date) + 1 }})
+                                                    </span>
+                                                @else
+                                                    {{ $agenda->display_date->translatedFormat('l') }}
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -179,11 +224,13 @@
 
                                     <div class="flex items-center text-gray-500">
                                         <i class="fas fa-calendar mr-2 text-primary-500"></i>
-                                        <span>
+                                        <span class="font-medium">
                                             @if ($agenda->is_multi_day)
                                                 {{ $agenda->date_range }}
+                                                {{-- <span class="text-sm text-primary-600 ml-1">(Hari ini:
+                                                    {{ $agenda->display_date->translatedFormat('d M Y') }})</span> --}}
                                             @else
-                                                {{ $agenda->start_date->translatedFormat('d M Y') }}
+                                                {{ $agenda->display_date->translatedFormat('d M Y') }}
                                             @endif
                                         </span>
                                     </div>
@@ -221,26 +268,6 @@
             </section>
 
             <!-- Call to Action Section -->
-            {{-- <section class="py-16 bg-white">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="max-w-3xl mx-auto">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Butuh informasi lebih lanjut?</h2>
-                        <p class="text-xl text-gray-600 mb-8">Jika Anda memiliki pertanyaan atau membutuhkan informasi lebih lanjut
-                            tentang agenda, silakan hubungi kami.</p>
-                        <div class="flex flex-wrap justify-center gap-4">
-                            <a href="https://api.whatsapp.com/send/?phone=6282241407907&text&type=phone_number&app_absent=0"
-                                class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-colors">
-                                <i class="fas fa-envelope mr-2"></i> Kontak Kami
-                            </a>
-                            <a href="{{ route('filament.admin.auth.login') }}" target="_blank"
-                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md transition-colors">
-                                <i class="fas fa-user mr-2"></i> Area Admin
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @endsection --}}
             <section class="py-8 bg-white">
                 <div class="container mx-auto px-4 text-center">
                     <div class="max-w-2xl mx-auto">

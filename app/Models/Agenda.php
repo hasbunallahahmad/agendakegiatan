@@ -33,17 +33,6 @@ class Agenda extends Model
     {
         return $query->where('is_published', true);
     }
-
-    // public function scopeToday($query)
-    // {
-    //     return $query->whereDate('start_date', now()->toDateString());
-    // }
-
-    // public function scopeUpcoming($query)
-    // {
-    //     return $query->whereDate('start_date', '>', now()->toDateString());
-    // }
-
     public function scopeToday($query)
     {
         $today = now()->startOfDay();
