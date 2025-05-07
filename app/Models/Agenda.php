@@ -59,9 +59,19 @@ class Agenda extends Model
 
     public function scopeUpcoming($query)
     {
+        $today = now()->startOfDay();
         $tomorrow = now()->addDay()->startOfDay();
-        return $query->where(function ($query) use ($tomorrow) {
-            $query->whereDate('start_date', '>=', $tomorrow);
+
+        return $query->where(function ($query) use ($today, $tomorrow) {
+            $query->whereDate('start_date', '>=', $tomorrow)
+                ->orWhere(function ($query) use ($today) {
+                    $query->whereDate('start_date', '<', $today)
+                        ->whereDate('end_date', '>', $today);
+                })
+                ->orWhere(function ($query) use ($today) {
+                    $query->whereDate('start_date', $today)
+                        ->whereDate('end_date', '>', $today);
+                });
         });
     }
 
@@ -75,10 +85,11 @@ class Agenda extends Model
 
     public function getDateRangeAttribute()
     {
-        if ($this->end_date || $this->start_date->isSameDay($this->end_date)) {
+        if (!$this->end_date || $this->start_date->isSameDay($this->end_date)) {
             return $this->start_date->translatedFormat('d M Y');
-            }
+        }
 
-            return $this->start_date->translatedFormat('d M Y') . ' - ' . 
+        return $this->start_date->translatedFormat('d M Y') . ' - ' .
             $this->end_date->translatedFormat('d M Y');
+    }
 }

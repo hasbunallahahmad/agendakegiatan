@@ -37,8 +37,15 @@
                                 </div>
                                 <div>
                                     <div class="font-medium text-gray-600">
-                                        {{ $agenda->start_date->translatedFormat('M Y') }}</div>
-                                    <div class="text-sm text-gray-500">{{ $agenda->start_date->translatedFormat('l') }}
+                                        {{ $agenda->start_date->translatedFormat('M Y') }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        @if ($agenda->is_multi_day)
+                                            <span
+                                                class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs">Multi-day</span>
+                                        @else
+                                            {{ $agenda->start_date->translatedFormat('l') }}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -53,35 +60,48 @@
                                 <p class="text-gray-600 mb-4">{{ Str::limit($agenda->description, 250) }}</p>
                             @endif
 
-                            @if ($agenda->bidang->count() > 0)
+                            <div class="flex flex-col space-y-2">
+                                @if ($agenda->bidang->count() > 0)
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-user mr-2 text-primary-500"></i>
+                                        <span>
+                                            @foreach ($agenda->bidang as $bidang)
+                                                {{ $bidang->nama_bidang }}@if (!$loop->last)
+                                                    ,
+                                                @endif
+                                            @endforeach
+                                        </span>
+                                    </div>
+                                @endif
+
                                 <div class="flex items-center text-gray-500">
-                                    <i class="fas fa-user mr-2 text-primary-500"></i>
+                                    <i class="fas fa-calendar mr-2 text-primary-500"></i>
                                     <span>
-                                        @foreach ($agenda->bidang as $bidang)
-                                            {{ $bidang->nama_bidang }}@if (!$loop->last)
-                                                ,
-                                            @endif
-                                        @endforeach
+                                        @if ($agenda->is_multi_day)
+                                            {{ $agenda->date_range }}
+                                        @else
+                                            {{ $agenda->start_date->translatedFormat('d M Y') }}
+                                        @endif
                                     </span>
                                 </div>
-                            @endif
 
-                            <div class="flex items-center text-gray-500">
-                                <i class="fas fa-clock mr-2 text-primary-500"></i>
-                                <span>
-                                    {{ $agenda->start_date->format('H:i') }}
-                                    @if ($agenda->end_date)
-                                        - {{ $agenda->end_date->format('H:i') }}
-                                    @endif
-                                </span>
-                            </div>
-
-                            @if ($agenda->location)
                                 <div class="flex items-center text-gray-500">
-                                    <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
-                                    <span>{{ $agenda->location }}</span>
+                                    <i class="fas fa-clock mr-2 text-primary-500"></i>
+                                    <span>
+                                        {{ $agenda->start_date->format('H:i') }}
+                                        @if ($agenda->end_date)
+                                            - {{ $agenda->end_date->format('H:i') }}
+                                        @endif
+                                    </span>
                                 </div>
-                            @endif
+
+                                @if ($agenda->location)
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
+                                        <span>{{ $agenda->location }}</span>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     @empty
@@ -97,6 +117,8 @@
             </div>
         </section>
 
+
+        <!-- Upcoming Agenda Section -->
         <!-- Upcoming Agenda Section -->
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
@@ -118,8 +140,15 @@
                                     </div>
                                     <div>
                                         <div class="font-medium text-gray-600">
-                                            {{ $agenda->start_date->translatedFormat('M Y') }}</div>
-                                        <div class="text-sm text-gray-500">{{ $agenda->start_date->translatedFormat('l') }}
+                                            {{ $agenda->start_date->translatedFormat('M Y') }}
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            @if ($agenda->is_multi_day)
+                                                <span
+                                                    class="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs">Multi-day</span>
+                                            @else
+                                                {{ $agenda->start_date->translatedFormat('l') }}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -147,6 +176,17 @@
                                             </span>
                                         </div>
                                     @endif
+
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-calendar mr-2 text-primary-500"></i>
+                                        <span>
+                                            @if ($agenda->is_multi_day)
+                                                {{ $agenda->date_range }}
+                                            @else
+                                                {{ $agenda->start_date->translatedFormat('d M Y') }}
+                                            @endif
+                                        </span>
+                                    </div>
 
                                     <div class="flex items-center text-gray-500">
                                         <i class="fas fa-clock mr-2 text-primary-500"></i>

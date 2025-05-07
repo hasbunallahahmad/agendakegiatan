@@ -78,11 +78,11 @@ class AgendaResource extends Resource
                     ->dateTime('d M Y, H:i')
                     ->sortable(),
 
-                // Tables\Columns\TextColumn::make('end_date')
-                //     ->label('Tanggal Selesai')
-                //     ->dateTime('d M Y, H:i')
-                //     ->sortable()
-                //     ->toggleable(),
+                Tables\Columns\TextColumn::make('end_date')
+                    ->label('Tanggal Selesai')
+                    ->dateTime('d M Y, H:i')
+                    ->sortable()
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('location')
                     ->label('Lokasi')
