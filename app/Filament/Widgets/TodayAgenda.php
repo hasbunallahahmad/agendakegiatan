@@ -55,6 +55,13 @@ class TodayAgenda extends BaseWidget
                 Tables\Actions\EditAction::make()
                     ->url(fn(Agenda $record): string => route('filament.admin.resources.agendas.edit', $record)),
             ])
+            ->emptyStateActions([
+                Tables\Actions\Action::make('create')
+                    ->label('Buat Agenda')
+                    ->url(route('filament.admin.resources.agendas.create'))
+                    ->icon('heroicon-s-plus-circle')
+                    ->color('primary'),
+            ])
             ->emptyStateHeading('Belum Ada Agenda Hari Ini')
             ->emptyStateDescription('Belum ada agenda yang dijadwalkan untuk hari ini.')
             ->emptyStateIcon('heroicon-o-calendar')

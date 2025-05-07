@@ -37,10 +37,12 @@ class AgendaResource extends Resource
 
                 Forms\Components\DateTimePicker::make('start_date')
                     ->label('Tanggal Mulai')
+                    ->seconds(false)
                     ->required(),
 
                 Forms\Components\DateTimePicker::make('end_date')
                     ->label('Tanggal Selesai')
+                    ->seconds(false)
                     ->after('start_date'),
 
                 Forms\Components\TextInput::make('location')
