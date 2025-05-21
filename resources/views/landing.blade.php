@@ -152,7 +152,7 @@
                                     </div>
                                 @endif
 
-                                <div class="flex items-center text-gray-500">
+                                {{-- <div class="flex items-center text-gray-500">
                                     <i class="fas fa-calendar mr-2 text-primary-500"></i>
                                     <span>
                                         @if ($agenda->is_multi_day)
@@ -161,7 +161,7 @@
                                             {{ $agenda->start_date->translatedFormat('d M Y') }}
                                         @endif
                                     </span>
-                                </div>
+                                </div> --}}
 
                                 <div class="flex items-center text-gray-500">
                                     <i class="fas fa-clock mr-2 text-primary-500"></i>
@@ -302,14 +302,14 @@
                                     @endif
 
                                     <div class="flex items-center text-gray-500">
-                                        <i class="fas fa-calendar mr-2 text-primary-500"></i>
+                                        {{-- <i class="fas fa-calendar mr-2 text-primary-500"></i> --}}
                                         <span class="font-medium">
                                             @if ($agenda->is_multi_day)
-                                                {{ $agenda->date_range }}
+                                                {{-- {{ $agenda->date_range }}
                                                 {{-- <span class="text-sm text-primary-600 ml-1">(Hari ini:
                                                     {{ $agenda->display_date->translatedFormat('d M Y') }})</span> --}}
                                             @else
-                                                {{ $agenda->display_date->translatedFormat('d M Y') }}
+                                                {{-- {{ $agenda->display_date->translatedFormat('d M Y') }} --}}
                                             @endif
                                         </span>
                                     </div>
